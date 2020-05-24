@@ -104,6 +104,40 @@ import { add } from "../store";
 // Provider를 통해 store에 접근이 가능하다. connect를 사용하면 된다.
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
+/*
+첫번쨰 인자는 state 값을 가져온다
+관행처럼 mapStateToProps라고 네이밍 해주는게 좋다.
+두번째 인자는 action을 위한것인데 이것도 역시 네이밍을 mapDispatchToProps로 한다.
+import로 가져온 store의 add를 dispatch 해서 기능을 실행한다.
+*/
 
+function mapStateToProps(state, ownProps){
+    return { todos: state }
+}
+function mapDispatchToProps(dispatch){
+    return {
+        addTodo: text => dispatch(add(text)) 
+    }
+}
+```
+
+#### useState 
+``` javascript
+//Home.js
+import React, { useState } from 'react';
+import { connect } from "react-redux";
+import { add } from "../store";
+
+const [ text, setText ] = useState("");
+/*
+useState("")로 초기값(text)을 빈값으로 설정해주고
+setText(value)로 set 하여 값을 변경하여 text에 다시 반영한다.
+*/
+```
+
+#### ? Optional Chaining
+``` javascript
+//Optional Chaining은 새로고침시 state가 사라지는것을 방지 
+<h3>{todos?.text}</h3>
 
 ```
